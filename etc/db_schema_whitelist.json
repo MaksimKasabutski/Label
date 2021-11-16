@@ -1,0 +1,78 @@
+{
+    "label_entity": {
+        "column": {
+            "label_id": true,
+            "name": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "label_view_property": {
+        "column": {
+            "label_id": true,
+            "store_id": true,
+            "is_enabled": true,
+            "priority": true,
+            "use_for_parent": true,
+            "scheduled_from": true,
+            "scheduled_to": true,
+            "conditions_serialized": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "LABEL_VIEW_PROPERTY_LABEL_ID_LABEL_ENTITY_LABEL_ID": true,
+            "LABEL_VIEW_PROPERTY_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "label_view": {
+        "column": {
+            "label_id": true,
+            "store_id": true,
+            "page_type": true,
+            "view_type": true,
+            "label_text": true,
+            "text_size": true,
+            "text_color": true,
+            "image": true,
+            "image_size": true,
+            "position": true,
+            "tooltip_status": true,
+            "tooltip_text": true,
+            "tooltip_type": true,
+            "tooltip_mobile_type": true,
+            "tooltip_color": true,
+            "tooltip_text_color": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "LABEL_VIEW_LABEL_ID_LABEL_ENTITY_LABEL_ID": true,
+            "LABEL_VIEW_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "label_customer_group": {
+        "column": {
+            "label_id": true,
+            "store_id": true,
+            "customer_group_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "LABEL_CUSTOMER_GROUP_LABEL_ID_LABEL_ENTITY_LABEL_ID": true,
+            "LABEL_CSTMR_GROUP_CSTMR_GROUP_ID_CSTMR_GROUP_CSTMR_GROUP_ID": true,
+            "LABEL_CUSTOMER_GROUP_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+
+    "label_index": {
+        "column": {
+            "label_id": true,
+            "store_id": true,
+            "sku": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "LABEL_INDEX_LABEL_ID_LABEL_ENTITY_LABEL_ID": true
+        }
+    }
+}

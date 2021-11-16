@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="label_entity" resource="default" engine="innodb" comment="Label Main Entity">
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="true" comment="Label Id"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Label Name"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="label_id"/>
+        </constraint>
+    </table>
+
+    <table name="label_view_property" resource="default" engine="innodb" comment="Label View Property">
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="false" comment="Label Id"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Label Store Id"/>
+        <column xsi:type="boolean" name="is_enabled" nullable="false" unsigned="true" comment="Is Enabled"/>
+        <column xsi:type="tinyint" name="priority"  length="3" nullable="false" comment="Label Priority"/>
+        <column xsi:type="boolean" name="use_for_parent" nullable="false" comment="Display child`s label for parent (configurable and grouped products only)"/>
+        <column xsi:type="datetime" name="scheduled_from" nullable="true" comment="Scheduled from"/>
+        <column xsi:type="datetime" name="scheduled_to" nullable="true" comment="Scheduled to"/>
+        <column xsi:type="text" name="conditions_serialized" nullable="false" comment="Display Label Conditions"/>
+
+        <constraint xsi:type="primary" rederenceId="PRIMARY">
+            <column name="label_id"/>
+            <column name="store_id"/>
+        </constraint>
+
+        <constraint xsi:type="foreign"
+                    referenceId="LABEL_VIEW_PROPERTY_LABEL_ENTITY"
+                    table="label_view_property"
+                    column="label_id"
+                    referenceTable="label_entity"
+                    referenceColumn="label_id"
+                    onDelete="CASCADE"
+        />
+        <constraint xsi:type="foreign"
+                    referenceId="LABEL_VIEW_PROPERTY_STORE"
+                    table="label_view"
+                    column="store_id"
+                    referenceTable="store"
+                    referenceColumn="store_id"
+                    onDelete="CASCADE"
+        />
+    </table>
+
+    <table name="label_view" resource="default" engine="innodb" comment="Label View">
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="false" comment="Label Id"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Label Store Id"/>
+        <column xsi:type="tinyint" name="page_type" nullable="false" comment="Page Type Code"/>
+        <column xsi:type="tinyint" name="view_type" nullable="false" comment="Only text or image view"/>
+        <column xsi:type="varchar" name="label_text" nullable="true" comment="Label Text"/>
+        <column xsi:type="int" name="text_size" nullable="true" comment="Label Text Size"/>
+        <column xsi:type="varchar" name="text_color" nullable="true" comment="Label Text Color"/>
+        <column xsi:type="mediumtext" name="image" nullable="true" comment="Label Image"/>
+        <column xsi:type="varchar" name="image_size" nullable="true" comment="Percent of the product image."/>
+        <column xsi:type="tinyint" name="position" nullable="false" unsigned="true" comment="Label Position"/>
+        <column xsi:type="boolean" name="tooltip_status" nullable="false"  comment="Is tooltip enabled"/>
+        <column xsi:type="varchar" name="tooltip_text" nullable="true"  comment="Tooltip Text"/>
+        <column xsi:type="tinyint" name="tooltip_type" nullable="true" unsigned="false"  comment="Tooltip Type"/>
+        <column xsi:type="tinyint" name="tooltip_mobile_type" nullable="true" unsigned="false"  comment="Tooltip Mobile Type"/>
+        <column xsi:type="varchar" name="tooltip_color" nullable="true"  comment="Tooltip Color"/>
+        <column xsi:type="varchar" name="tooltip_text_color" nullable="true"  comment="Tooltip Text Color"/>
+
+        <constraint xsi:type="primary" rederenceId="PRIMARY">
+            <column name="label_id"/>
+            <column name="store_id"/>
+        </constraint>
+
+        <constraint xsi:type="foreign"
+                    referenceId="LABEL_VIEW_LABEL_ENTITY"
+                    table="label_view"
+                    column="label_id"
+                    referenceTable="label_entity"
+                    referenceColumn="label_id"
+                    onDelete="CASCADE"
+        />
+        <constraint xsi:type="foreign"
+                    referenceId="LABEL_VIEW_STORE"
+                    table="label_view"
+                    column="store_id"
+                    referenceTable="store"
+                    referenceColumn="store_id"
+                    onDelete="CASCADE"
+        />
+    </table>
+
+    <table name="label_customer_group" resource="default" engine="innodb" comment="Label Customer Group">
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="false" comment="Label Id"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Label Store Id"/>
+        <column xsi:type="int" name="customer_group_id" unsigned="true" nullable="false" identity="false" comment="Label Customer Group Id"/>
+
+        <constraint xsi:type="primary" rederenceId="PRIMARY">
+            <column name="label_id"/>
+            <column name="store_id"/>
+            <column name="customer_group_id"/>
+        </constraint>
+
+        <constraint xsi:type="foreign"
+                    referenceId="LABEL_CUSTOMER_GROUP_LABEL_ENTITY"
+                    table="label_customer_group"
+                    column="label_id"
+                    referenceTable="label_entity"
+                    referenceColumn="label_id"
+                    onDelete="CASCADE"
+        />
+        <constraint xsi:type="foreign"
+                    referenceId="LABEL_CUSTOMER_GROUP_CUSTOMER_GROUP"
+                    table="label_customer_group"
+                    column="customer_group_id"
+                    referenceTable="customer_group"
+                    referenceColumn="customer_group_id"
+                    onDelete="CASCADE"
+        />
+        <constraint xsi:type="foreign"
+                    referenceId="LABEL_CUSTOMER_GROUP_STORE"
+                    table="label_customer_group"
+                    column="store_id"
+                    referenceTable="store"
+                    referenceColumn="store_id"
+                    onDelete="CASCADE"
+        />
+    </table>
+
+    <table name="label_index" resource="default" engine="innodb" comment="Label Index">
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="false" comment="Label Id"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Label Store Id"/>
+        <column xsi:type="varchar" name="sku" nullable="false" identity="false" comment="Product Sku"/>
+
+        <constraint xsi:type="primary" rederenceId="PRIMARY">
+            <column name="label_id"/>
+            <column name="store_id"/>
+            <column name="sku"/>
+        </constraint>
+
+        <constraint xsi:type="foreign"
+                    referenceId="LABEL_INDEX_LABEL_ENTITY"
+                    table="label_index"
+                    column="label_id"
+                    referenceTable="label_entity"
+                    referenceColumn="label_id"
+                    onDelete="CASCADE"
+        />
+    </table>
+</schema>
