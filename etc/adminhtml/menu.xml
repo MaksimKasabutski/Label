@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Krexik_Label::menu"
+             title="Krexik"
+             module="Krexik_Label"
+             translate="title"
+             sortOrder="50"
+             resource="Krexik_Label::menu"/>
+        <add id="Krexik_Label::menuconfig"
+             title="Configuration"
+             translate="title"
+             module="Krexik_Label"
+             sortOrder="10"
+             parent="Krexik_Label::menu"
+             action="adminhtml/system_config/edit/section/krexik_label/"
+             resource="Krexik_Label::configuration"/>
+        <add id="Krexik_Label::label"
+             title="Product Labels"
+             module="Krexik_Label"
+             sortOrder="40"
+             parent="Magento_Catalog::inventory"
+             action="krexik_label/label/"
+             resource="Krexik_Label::label"/>
+    </menu>
+</config>

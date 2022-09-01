@@ -13,14 +13,14 @@
     <table name="label_view_property" resource="default" engine="innodb" comment="Label View Property">
         <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="false" comment="Label Id"/>
         <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Label Store Id"/>
-        <column xsi:type="boolean" name="is_enabled" nullable="false" unsigned="true" comment="Is Enabled"/>
-        <column xsi:type="tinyint" name="priority"  length="3" nullable="false" comment="Label Priority"/>
+        <column xsi:type="boolean" name="is_enabled" nullable="false" comment="Is Enabled"/>
+        <column xsi:type="tinyint" name="priority" nullable="false" comment="Label Priority"/>
         <column xsi:type="boolean" name="use_for_parent" nullable="false" comment="Display child`s label for parent (configurable and grouped products only)"/>
         <column xsi:type="datetime" name="scheduled_from" nullable="true" comment="Scheduled from"/>
         <column xsi:type="datetime" name="scheduled_to" nullable="true" comment="Scheduled to"/>
         <column xsi:type="text" name="conditions_serialized" nullable="false" comment="Display Label Conditions"/>
 
-        <constraint xsi:type="primary" rederenceId="PRIMARY">
+        <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="label_id"/>
             <column name="store_id"/>
         </constraint>
@@ -61,9 +61,10 @@
         <column xsi:type="varchar" name="tooltip_color" nullable="true"  comment="Tooltip Color"/>
         <column xsi:type="varchar" name="tooltip_text_color" nullable="true"  comment="Tooltip Text Color"/>
 
-        <constraint xsi:type="primary" rederenceId="PRIMARY">
+        <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="label_id"/>
             <column name="store_id"/>
+            <column name="page_type"/>
         </constraint>
 
         <constraint xsi:type="foreign"
@@ -89,7 +90,7 @@
         <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Label Store Id"/>
         <column xsi:type="int" name="customer_group_id" unsigned="true" nullable="false" identity="false" comment="Label Customer Group Id"/>
 
-        <constraint xsi:type="primary" rederenceId="PRIMARY">
+        <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="label_id"/>
             <column name="store_id"/>
             <column name="customer_group_id"/>
@@ -124,9 +125,9 @@
     <table name="label_index" resource="default" engine="innodb" comment="Label Index">
         <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="false" comment="Label Id"/>
         <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" comment="Label Store Id"/>
-        <column xsi:type="varchar" name="sku" nullable="false" identity="false" comment="Product Sku"/>
+        <column xsi:type="varchar" name="sku" nullable="false" comment="Product Sku"/>
 
-        <constraint xsi:type="primary" rederenceId="PRIMARY">
+        <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="label_id"/>
             <column name="store_id"/>
             <column name="sku"/>

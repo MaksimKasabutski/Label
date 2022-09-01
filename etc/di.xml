@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Krexik\Label\Model\ResourceModel\Label\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">Krexik\Label\Model\ResourceModel\Label::TABLE_NAME</argument>
+            <argument name="resourceModel" xsi:type="string">Krexik\Label\Model\ResourceModel\Label</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="krexik_labels_listing_data_source" xsi:type="string">Krexik\Label\Model\ResourceModel\Label\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
